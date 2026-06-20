@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect, useMemo } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import { API_URL } from '../config';
 import { UrunContext } from '../context/UrunContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Edit2, Trash2, Package, Tag, CreditCard, Image as ImageIcon, X, ShoppingBag, Clock, CheckCircle, Truck, AlertCircle, ChevronRight, ExternalLink, TrendingUp, DollarSign, Users, ArrowUpRight, ArrowDownRight, PieChart as PieChartIcon, BarChart as BarChartIcon, Star, MessageSquare } from 'lucide-react';
@@ -137,7 +138,7 @@ const SaticiPaneli = () => {
     setYukleniyorSiparis(true);
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch('http://localhost:5000/api/satici/siparisler', {
+      const cevap = await fetch(`${API_URL}/api/satici/siparisler`, {
         headers: { 'x-auth-token': token }
       });
       if (cevap.ok) {
@@ -154,7 +155,7 @@ const SaticiPaneli = () => {
   const iadeleriGetir = async () => {
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch('http://localhost:5000/api/satici/iadeler', {
+      const cevap = await fetch(`${API_URL}/api/satici/iadeler`, {
         headers: { 'x-auth-token': token }
       });
       if (cevap.ok) {
@@ -169,7 +170,7 @@ const SaticiPaneli = () => {
   const yorumlarıGetir = async () => {
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch('http://localhost:5000/api/admin/gelen-yorumlar', {
+      const cevap = await fetch(`${API_URL}/api/admin/gelen-yorumlar`, {
         headers: { 'x-auth-token': token }
       });
       if (cevap.ok) {
@@ -183,7 +184,7 @@ const SaticiPaneli = () => {
   const kuponlariGetir = async () => {
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch('http://localhost:5000/api/satici/kuponlar', {
+      const cevap = await fetch(`${API_URL}/api/satici/kuponlar`, {
         headers: { 'x-auth-token': token }
       });
       if (cevap.ok) {
@@ -198,7 +199,7 @@ const SaticiPaneli = () => {
     e.preventDefault();
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch('http://localhost:5000/api/satici/kuponlar', {
+      const cevap = await fetch(`${API_URL}/api/satici/kuponlar`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -223,7 +224,7 @@ const SaticiPaneli = () => {
     if (!window.confirm('Bu kuponu silmek istediğinize emin misiniz?')) return;
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch(`http://localhost:5000/api/satici/kuponlar/${id}`, {
+      const cevap = await fetch(`${API_URL}/api/satici/kuponlar/${id}`, {
         method: 'DELETE',
         headers: { 'x-auth-token': token }
       });
@@ -241,7 +242,7 @@ const SaticiPaneli = () => {
 
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch(`http://localhost:5000/api/yorumlar/${yorumId}/cevap`, {
+      const cevap = await fetch(`${API_URL}/api/yorumlar/${yorumId}/cevap`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -264,7 +265,7 @@ const SaticiPaneli = () => {
     
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch(`http://localhost:5000/api/satici/iadeler/${iadeId}`, {
+      const cevap = await fetch(`${API_URL}/api/satici/iadeler/${iadeId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -285,7 +286,7 @@ const SaticiPaneli = () => {
   const iadeGizle = async (iadeId) => {
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch(`http://localhost:5000/api/satici/iadeler/${iadeId}/gizle`, {
+      const cevap = await fetch(`${API_URL}/api/satici/iadeler/${iadeId}/gizle`, {
         method: 'PUT',
         headers: { 'x-auth-token': token }
       });
@@ -311,7 +312,7 @@ const SaticiPaneli = () => {
     
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch(`http://localhost:5000/api/satici/siparisler/${siparisId}`, {
+      const cevap = await fetch(`${API_URL}/api/satici/siparisler/${siparisId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -332,7 +333,7 @@ const SaticiPaneli = () => {
 
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch(`http://localhost:5000/api/satici/siparisler/${siparisId}`, {
+      const cevap = await fetch(`${API_URL}/api/satici/siparisler/${siparisId}`, {
         method: 'DELETE',
         headers: { 'x-auth-token': token }
       });
@@ -439,7 +440,7 @@ const SaticiPaneli = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
-    const url = duzenlemeModu ? `http://localhost:5000/api/urunler/${seciliUrun.id}` : 'http://localhost:5000/api/urunler';
+    const url = duzenlemeModu ? `${API_URL}/api/urunler/${seciliUrun.id}` : `${API_URL}/api/urunler`;
     const method = duzenlemeModu ? 'PUT' : 'POST';
 
     try {
@@ -465,7 +466,7 @@ const SaticiPaneli = () => {
     if (window.confirm('Bu ürünü silmek istediğinize emin misiniz?')) {
       const token = localStorage.getItem('token');
       try {
-        const cevap = await fetch(`http://localhost:5000/api/urunler/${id}`, {
+        const cevap = await fetch(`${API_URL}/api/urunler/${id}`, {
           method: 'DELETE',
           headers: { 'x-auth-token': token }
         });

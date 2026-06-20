@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import { API_URL } from '../config';
 import { SettingsContext } from '../context/SettingsContext';
 import Loader from '../components/Loader';
 import { 
@@ -49,13 +50,13 @@ const AdminPaneli = () => {
     const token = localStorage.getItem('token');
     try {
       const [istCevap, kullCevap, sipCevap, iadeCevap, urunCevap, ayarCevap, katCevap] = await Promise.all([
-        fetch('http://localhost:5000/api/admin/istatistikler', { headers: { 'x-auth-token': token } }),
-        fetch('http://localhost:5000/api/admin/kullanicilar', { headers: { 'x-auth-token': token } }),
-        fetch('http://localhost:5000/api/admin/tum-siparisler', { headers: { 'x-auth-token': token } }),
-        fetch('http://localhost:5000/api/admin/tum-iadeler', { headers: { 'x-auth-token': token } }),
-        fetch('http://localhost:5000/api/urunler'),
-        fetch('http://localhost:5000/api/ayarlar'),
-        fetch('http://localhost:5000/api/kategoriler')
+        fetch(`${API_URL}/api/admin/istatistikler`, { headers: { 'x-auth-token': token } }),
+        fetch(`${API_URL}/api/admin/kullanicilar`, { headers: { 'x-auth-token': token } }),
+        fetch(`${API_URL}/api/admin/tum-siparisler`, { headers: { 'x-auth-token': token } }),
+        fetch(`${API_URL}/api/admin/tum-iadeler`, { headers: { 'x-auth-token': token } }),
+        fetch(`${API_URL}/api/urunler`),
+        fetch(`${API_URL}/api/ayarlar`),
+        fetch(`${API_URL}/api/kategoriler`)
       ]);
 
       if (istCevap.ok) {
@@ -87,7 +88,7 @@ const AdminPaneli = () => {
     if (!isim) return;
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch('http://localhost:5000/api/admin/kategoriler', {
+      const cevap = await fetch(`${API_URL}/api/admin/kategoriler`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-auth-token': token },
         body: JSON.stringify({ isim })
@@ -103,7 +104,7 @@ const AdminPaneli = () => {
     if (!window.confirm('Bu kategoriyi silmek istediğinize emin misiniz?')) return;
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch(`http://localhost:5000/api/admin/kategoriler/${id}`, {
+      const cevap = await fetch(`${API_URL}/api/admin/kategoriler/${id}`, {
         method: 'DELETE',
         headers: { 'x-auth-token': token }
       });
@@ -115,7 +116,7 @@ const AdminPaneli = () => {
     if (!window.confirm('Bu kullanıcıyı silmek istediğinize emin misiniz?')) return;
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch(`http://localhost:5000/api/admin/kullanicilar/${id}`, {
+      const cevap = await fetch(`${API_URL}/api/admin/kullanicilar/${id}`, {
         method: 'DELETE',
         headers: { 'x-auth-token': token }
       });
@@ -129,7 +130,7 @@ const AdminPaneli = () => {
   const rolGuncelle = async (id, yeniRol) => {
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch(`http://localhost:5000/api/admin/kullanicilar/${id}/rol`, {
+      const cevap = await fetch(`${API_URL}/api/admin/kullanicilar/${id}/rol`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', 'x-auth-token': token },
         body: JSON.stringify({ rol: yeniRol })
@@ -145,7 +146,7 @@ const AdminPaneli = () => {
     if (!window.confirm('Bu ürünü admin yetkisiyle silmek üzeresiniz. Onaylıyor musunuz?')) return;
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch(`http://localhost:5000/api/admin/urunler/${id}`, {
+      const cevap = await fetch(`${API_URL}/api/admin/urunler/${id}`, {
         method: 'DELETE',
         headers: { 'x-auth-token': token }
       });
@@ -159,7 +160,7 @@ const AdminPaneli = () => {
   const ayarGuncelle = async (anahtar, deger) => {
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch(`http://localhost:5000/api/admin/ayarlar/${anahtar}`, {
+      const cevap = await fetch(`${API_URL}/api/admin/ayarlar/${anahtar}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', 'x-auth-token': token },
         body: JSON.stringify({ deger })

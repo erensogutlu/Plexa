@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
+import { API_URL } from '../config';
 
 export const UrunContext = createContext();
 
@@ -10,7 +11,7 @@ export const UrunProvider = ({ children }) => {
   useEffect(() => {
     const urunleriGetir = async () => {
       try {
-        const cevap = await fetch('http://localhost:5000/api/urunler');
+        const cevap = await fetch(`${API_URL}/api/urunler`);
         if (!cevap.ok) {
           throw new Error('veriler alinamadi');
         }

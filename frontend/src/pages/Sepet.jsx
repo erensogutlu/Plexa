@@ -1,5 +1,6 @@
 import { useContext, useState, useEffect } from 'react';
 import { SepetContext } from '../context/SepetContext';
+import { API_URL } from '../config';
 import { Trash2, ShoppingBag, ArrowRight, CheckCircle, CreditCard, Plus } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -49,7 +50,7 @@ const Sepet = () => {
     const token = localStorage.getItem('token');
     if (!token) return;
     try {
-      const cevap = await fetch('http://localhost:5000/api/adresler', {
+      const cevap = await fetch(`${API_URL}/api/adresler`, {
         headers: { 'x-auth-token': token }
       });
       if (cevap.ok) {
@@ -66,7 +67,7 @@ const Sepet = () => {
     const token = localStorage.getItem('token');
     if (!token) return;
     try {
-      const cevap = await fetch('http://localhost:5000/api/kartlar', {
+      const cevap = await fetch(`${API_URL}/api/kartlar`, {
         headers: { 'x-auth-token': token }
       });
       if (cevap.ok) {
@@ -99,7 +100,7 @@ const Sepet = () => {
     setKuponHata('');
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch('http://localhost:5000/api/kuponlar/dogrula', {
+      const cevap = await fetch(`${API_URL}/api/kuponlar/dogrula`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -147,7 +148,7 @@ const Sepet = () => {
     {/* eğer yeni kartsa ve kaydet seçiliyse kaydet */}
     if (!seciliKartId && kartKaydet) {
       try {
-        await fetch('http://localhost:5000/api/kartlar', {
+        await fetch(`${API_URL}/api/kartlar`, {
           method: 'POST',
           headers: { 
             'Content-Type': 'application/json',
@@ -174,7 +175,7 @@ const Sepet = () => {
     const seciliAdres = adresler.find(a => a.id === seciliAdresId);
 
     try {
-      const cevap = await fetch('http://localhost:5000/api/siparisler', {
+      const cevap = await fetch(`${API_URL}/api/siparisler`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

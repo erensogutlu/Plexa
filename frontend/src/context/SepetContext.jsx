@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect, useContext } from 'react';
 import { AuthContext } from './AuthContext';
+import { API_URL } from '../config';
 
 export const SepetContext = createContext();
 
@@ -21,7 +22,7 @@ export const SepetProvider = ({ children }) => {
   const sepetiGetir = async () => {
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch('http://localhost:5000/api/sepet', {
+      const cevap = await fetch(`${API_URL}/api/sepet`, {
         headers: { 'x-auth-token': token }
       });
       if (cevap.ok) {
@@ -36,7 +37,7 @@ export const SepetProvider = ({ children }) => {
   const favorileriGetir = async () => {
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch('http://localhost:5000/api/favoriler', {
+      const cevap = await fetch(`${API_URL}/api/favoriler`, {
         headers: { 'x-auth-token': token }
       });
       if (cevap.ok) {
@@ -52,7 +53,7 @@ export const SepetProvider = ({ children }) => {
     if (!kullanici) return alert('Lütfen önce giriş yapın');
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch('http://localhost:5000/api/sepet', {
+      const cevap = await fetch(`${API_URL}/api/sepet`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -71,7 +72,7 @@ export const SepetProvider = ({ children }) => {
   const sepettenCikar = async (sepetId) => {
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch(`http://localhost:5000/api/sepet/${sepetId}`, {
+      const cevap = await fetch(`${API_URL}/api/sepet/${sepetId}`, {
         method: 'DELETE',
         headers: { 'x-auth-token': token }
       });
@@ -90,7 +91,7 @@ export const SepetProvider = ({ children }) => {
     const method = isFavori ? 'DELETE' : 'POST';
     
     try {
-      const cevap = await fetch(`http://localhost:5000/api/favoriler/${urunId}`, {
+      const cevap = await fetch(`${API_URL}/api/favoriler/${urunId}`, {
         method: method,
         headers: { 'x-auth-token': token }
       });

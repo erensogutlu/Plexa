@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
+import { API_URL } from '../config';
 
 export const AuthContext = createContext();
 
@@ -17,7 +18,7 @@ export const AuthProvider = ({ children }) => {
 
   const mevcutKullaniciyiGetir = async (token) => {
     try {
-      const cevap = await fetch('http://localhost:5000/api/auth/me', {
+      const cevap = await fetch(`${API_URL}/api/auth/me`, {
         headers: { 'x-auth-token': token }
       });
       if (cevap.ok) {
@@ -34,7 +35,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const girisYap = async (email, sifre) => {
-    const cevap = await fetch('http://localhost:5000/api/auth/giris', {
+    const cevap = await fetch(`${API_URL}/api/auth/giris`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, sifre })
@@ -49,7 +50,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const kayitOl = async (isim, email, sifre, rol) => {
-    const cevap = await fetch('http://localhost:5000/api/auth/kayit', {
+    const cevap = await fetch(`${API_URL}/api/auth/kayit`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ isim, email, sifre, rol })

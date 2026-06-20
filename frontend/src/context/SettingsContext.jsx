@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
+import { API_URL } from '../config';
 
 export const SettingsContext = createContext();
 
@@ -15,7 +16,7 @@ export const SettingsProvider = ({ children }) => {
 
   const ayarGetir = async () => {
     try {
-      const cevap = await fetch('http://localhost:5000/api/ayarlar');
+      const cevap = await fetch(`${API_URL}/api/ayarlar`);
       const data = await cevap.json();
       if (data.genel_ayarlar) {
         setAyarlar(onceki => ({ ...onceki, ...data.genel_ayarlar }));

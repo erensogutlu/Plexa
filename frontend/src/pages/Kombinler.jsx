@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { UrunContext } from '../context/UrunContext';
+import { API_URL } from '../config';
 import UrunKarti from '../components/UrunKarti';
 import { motion } from 'framer-motion';
 import { Sun, Snowflake, Sparkles, Wind, Umbrella, Coffee, Shirt } from 'lucide-react';
@@ -13,7 +14,7 @@ const Kombinler = () => {
   const [ayarVerisi, setAyarVerisi] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/ayarlar')
+    fetch(`${API_URL}/api/ayarlar`)
       .then(res => res.json())
       .then(data => {
         if (data.kombinler) setAyarVerisi(data.kombinler);

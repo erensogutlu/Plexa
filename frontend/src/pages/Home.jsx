@@ -1,5 +1,6 @@
 import { useContext, useState, useMemo, useEffect } from 'react';
 import { UrunContext } from '../context/UrunContext';
+import { API_URL } from '../config';
 import UrunKarti from '../components/UrunKarti';
 import Slider from '../components/Slider';
 import Loader from '../components/Loader';
@@ -19,7 +20,7 @@ const Home = () => {
 
   useEffect(() => {
     // Slider verisi
-    fetch('http://localhost:5000/api/ayarlar')
+    fetch(`${API_URL}/api/ayarlar`)
       .then(res => res.json())
       .then(data => {
         if (data.ana_slider) setSliderVerisi(data.ana_slider);
@@ -28,7 +29,7 @@ const Home = () => {
       .finally(() => setSliderYukleniyor(false));
 
     // Kategori verisi
-    fetch('http://localhost:5000/api/kategoriler')
+    fetch(`${API_URL}/api/kategoriler`)
       .then(res => res.json())
       .then(data => {
         const katIsimleri = data.map(k => k.isim);

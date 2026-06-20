@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { API_URL } from '../config';
 import { UrunContext } from '../context/UrunContext';
 import { SepetContext } from '../context/SepetContext';
 import { AuthContext } from '../context/AuthContext';
@@ -37,7 +38,7 @@ const UrunDetay = () => {
 
   const yorumlarıGetir = async () => {
     try {
-      const cevap = await fetch(`http://localhost:5000/api/yorumlar/urun/${id}`);
+      const cevap = await fetch(`${API_URL}/api/yorumlar/urun/${id}`);
       if (cevap.ok) {
         setYorumlar(await cevap.json());
       }
@@ -47,7 +48,7 @@ const UrunDetay = () => {
 
   const yetkiKontrol = async () => {
     try {
-      const cevap = await fetch(`http://localhost:5000/api/yorumlar/kontrol/${id}`, {
+      const cevap = await fetch(`${API_URL}/api/yorumlar/kontrol/${id}`, {
         headers: { 'x-auth-token': localStorage.getItem('token') }
       });
       if (cevap.ok) {
@@ -61,7 +62,7 @@ const UrunDetay = () => {
     if (!kullanici) return alert('Lütfen önce giriş yapın');
     setYorumGonderiliyor(true);
     try {
-      const cevap = await fetch('http://localhost:5000/api/yorumlar', {
+      const cevap = await fetch(`${API_URL}/api/yorumlar`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

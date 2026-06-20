@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import { API_URL } from '../config';
 import { motion, AnimatePresence } from 'framer-motion';
 import { User, MapPin, Mail, Shield, Plus, Trash2, Edit3, X, CreditCard, Package, Star, MessageSquare } from 'lucide-react';
 
@@ -33,7 +34,7 @@ const Profil = () => {
   const adresleriGetir = async () => {
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch('http://localhost:5000/api/adresler', {
+      const cevap = await fetch(`${API_URL}/api/adresler`, {
         headers: { 'x-auth-token': token }
       });
       if (cevap.ok) {
@@ -48,7 +49,7 @@ const Profil = () => {
   const kartlariGetir = async () => {
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch('http://localhost:5000/api/kartlar', {
+      const cevap = await fetch(`${API_URL}/api/kartlar`, {
         headers: { 'x-auth-token': token }
       });
       if (cevap.ok) {
@@ -64,7 +65,7 @@ const Profil = () => {
     e.preventDefault();
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch('http://localhost:5000/api/kartlar', {
+      const cevap = await fetch(`${API_URL}/api/kartlar`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -85,7 +86,7 @@ const Profil = () => {
   const handleKartSil = async (id) => {
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch(`http://localhost:5000/api/kartlar/${id}`, {
+      const cevap = await fetch(`${API_URL}/api/kartlar/${id}`, {
         method: 'DELETE',
         headers: { 'x-auth-token': token }
       });
@@ -101,7 +102,7 @@ const Profil = () => {
     e.preventDefault();
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch('http://localhost:5000/api/auth/profil', {
+      const cevap = await fetch(`${API_URL}/api/auth/profil`, {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json',
@@ -122,7 +123,7 @@ const Profil = () => {
     e.preventDefault();
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch('http://localhost:5000/api/adresler', {
+      const cevap = await fetch(`${API_URL}/api/adresler`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -143,7 +144,7 @@ const Profil = () => {
   const handleAdresSil = async (id) => {
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch(`http://localhost:5000/api/adresler/${id}`, {
+      const cevap = await fetch(`${API_URL}/api/adresler/${id}`, {
         method: 'DELETE',
         headers: { 'x-auth-token': token }
       });
@@ -158,7 +159,7 @@ const Profil = () => {
   const siparisleriGetir = async () => {
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch('http://localhost:5000/api/siparisler', {
+      const cevap = await fetch(`${API_URL}/api/siparisler`, {
         headers: { 'x-auth-token': token }
       });
       if (cevap.ok) {
@@ -173,7 +174,7 @@ const Profil = () => {
   const yorumlariGetir = async () => {
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch('http://localhost:5000/api/admin/yorumlarim', {
+      const cevap = await fetch(`${API_URL}/api/admin/yorumlarim`, {
         headers: { 'x-auth-token': token }
       });
       if (cevap.ok) {
@@ -188,7 +189,7 @@ const Profil = () => {
     if (!window.confirm('Yorumu silmek istediğinize emin misiniz?')) return;
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch(`http://localhost:5000/api/yorumlar/${id}`, {
+      const cevap = await fetch(`${API_URL}/api/yorumlar/${id}`, {
         method: 'DELETE',
         headers: { 'x-auth-token': token }
       });
@@ -204,7 +205,7 @@ const Profil = () => {
     e.preventDefault();
     const token = localStorage.getItem('token');
     try {
-      const cevap = await fetch('http://localhost:5000/api/iadeler', {
+      const cevap = await fetch(`${API_URL}/api/iadeler`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
