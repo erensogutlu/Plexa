@@ -37,6 +37,9 @@ uygulama.use(express.json({ limit: '10kb' }));
 uygulama.use(express.urlencoded({ limit: '10kb', extended: true }));
 
 // rotalar
+uygulama.get('/', (req, res) => {
+  res.status(200).json({ mesaj: 'Plexa API Sunucusu Aktif', durum: 'çalışıyor' });
+});
 uygulama.use('/api', require('./routes/genelRoutes'));
 uygulama.use('/api/auth', require('./routes/authRoutes'));
 uygulama.use('/api/kartlar', require('./routes/kartRoutes'));
