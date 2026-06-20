@@ -39,22 +39,25 @@ const Navbar = ({ siteBasligi }) => {
         </button>
 
         <div className={`nav-linkler ${menuAcik ? 'aktif' : ''}`}>
-          <Link to="/" className="nav-link" onClick={() => setMenuAcik(false)}>Keşfet</Link>
-          <Link to="/kombinler/yaz" className="nav-link" style={{ color: '#fbbf24' }} onClick={() => setMenuAcik(false)}>Yaz Kombinleri</Link>
-          <Link to="/kombinler/kis" className="nav-link" style={{ color: '#60a5fa' }} onClick={() => setMenuAcik(false)}>Kış Kombinleri</Link>
+          <div className="nav-orta-linkler">
+            <Link to="/" className="nav-link" onClick={() => setMenuAcik(false)}>Keşfet</Link>
+            <Link to="/kombinler/yaz" className="nav-link" style={{ color: '#fbbf24' }} onClick={() => setMenuAcik(false)}>Yaz Kombinleri</Link>
+            <Link to="/kombinler/kis" className="nav-link" style={{ color: '#60a5fa' }} onClick={() => setMenuAcik(false)}>Kış Kombinleri</Link>
+          </div>
           
-          {kullanici ? (
-            <>
-              {kullanici.rol === 'satici' && (
-                <Link to="/satici-paneli" className="nav-link" style={{ display: 'flex', alignItems: 'center', gap: '5px', color: 'var(--vurgu-rengi)' }} onClick={() => setMenuAcik(false)}>
-                  <Store size={18} /> Satıcı Paneli
-                </Link>
-              )}
-              {kullanici.rol === 'admin' && (
-                <Link to="/admin" className="nav-link" style={{ display: 'flex', alignItems: 'center', gap: '5px', color: '#10b981' }} onClick={() => setMenuAcik(false)}>
-                  <Shield size={18} /> Admin Paneli
-                </Link>
-              )}
+          <div className="nav-sag-eylemler">
+            {kullanici ? (
+              <>
+                {kullanici.rol === 'satici' && (
+                  <Link to="/satici-paneli" className="nav-link" style={{ display: 'flex', alignItems: 'center', gap: '5px', color: 'var(--vurgu-rengi)' }} onClick={() => setMenuAcik(false)}>
+                    <Store size={18} /> Satıcı Paneli
+                  </Link>
+                )}
+                {kullanici.rol === 'admin' && (
+                  <Link to="/admin" className="nav-link" style={{ display: 'flex', alignItems: 'center', gap: '5px', color: '#10b981' }} onClick={() => setMenuAcik(false)}>
+                    <Shield size={18} /> Admin Paneli
+                  </Link>
+                )}
                 <Link to="/favoriler" className="nav-link" style={{ display: 'flex', alignItems: 'center', gap: '8px' }} onClick={() => setMenuAcik(false)}>
                   <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
                     <Heart size={22} />
@@ -72,40 +75,41 @@ const Navbar = ({ siteBasligi }) => {
                     <LogOut size={18} /> Çıkış
                   </button>
                 </div>
-            </>
-          ) : (
-            <div className="giris-kayit-grubu">
-              <Link to="/giris" className="giris-btn" onClick={() => setMenuAcik(false)}>
-                <LogIn size={20} /> <span>Giriş Yap</span>
-              </Link>
-              <Link to="/kayit" className="kayit-btn" onClick={() => setMenuAcik(false)}>
-                Kayıt Ol
-              </Link>
-            </div>
-          )}
+              </>
+            ) : (
+              <div className="giris-kayit-grubu">
+                <Link to="/giris" className="giris-btn" onClick={() => setMenuAcik(false)}>
+                  <LogIn size={20} /> <span>Giriş Yap</span>
+                </Link>
+                <Link to="/kayit" className="kayit-btn" onClick={() => setMenuAcik(false)}>
+                  Kayıt Ol
+                </Link>
+              </div>
+            )}
 
-          <Link to="/sepet" className="btn-ana sepet-btn" style={{ padding: '10px 24px', borderRadius: '14px', textDecoration: 'none' }} onClick={() => setMenuAcik(false)}>
-            <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <ShoppingCart size={20} />
-              {/* masaüstü menüsü */}
-              {sepet.length > 0 && (
-                <span style={{ 
-                  position: 'absolute', 
-                  top: '-14px', 
-                  right: '-14px', 
-                  background: 'white', 
-                  color: 'var(--vurgu-rengi)', 
-                  fontSize: '0.75rem', 
-                  padding: '2px 6px', 
-                  borderRadius: '100px', 
-                  fontWeight: '900',
-                  boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
-                  border: '2px solid var(--vurgu-rengi)'
-                }}>{sepet.length}</span>
-              )}
-            </div>
-            <span>Sepetim</span>
-          </Link>
+            <Link to="/sepet" className="btn-ana sepet-btn" style={{ padding: '10px 24px', borderRadius: '14px', textDecoration: 'none' }} onClick={() => setMenuAcik(false)}>
+              <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <ShoppingCart size={20} />
+                {/* masaüstü menüsü */}
+                {sepet.length > 0 && (
+                  <span style={{ 
+                    position: 'absolute', 
+                    top: '-14px', 
+                    right: '-14px', 
+                    background: 'white', 
+                    color: 'var(--vurgu-rengi)', 
+                    fontSize: '0.75rem', 
+                    padding: '2px 6px', 
+                    borderRadius: '100px', 
+                    fontWeight: '900',
+                    boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
+                    border: '2px solid var(--vurgu-rengi)'
+                  }}>{sepet.length}</span>
+                )}
+              </div>
+              <span>Sepetim</span>
+            </Link>
+          </div>
         </div>
       </div>
     </nav>
